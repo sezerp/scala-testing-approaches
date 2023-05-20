@@ -16,8 +16,17 @@ object UserApiZioTest extends ZIOSpecDefault {
         request = UserRegisterRequest("account name", "user_login", "test@email.com", "some_password_123")
         _ <- ZIORequests.userRegister(request)(backend)
       } yield assertTrue(true)
+    },
+    test("[POST] login endpoint") {
+      for {
+        backend <- ZIO.service[SttpBackend[Task, Any]]
+        user    <- ZIORequests.createUser(backend)
+        request = UserLoginRequest(user.login, user.password)
+        _ <- ZIORequests.userLogin(request)(backend)
+      } yield assertTrue(true)
     }
-  ) @@ TestAspect.beforeAll(TestZioEmbeddedPostgres.beforeAll()) @@
+  ) @@
+    TestAspect.before(TestZioEmbeddedPostgres.beforeEach()) @@
     TestAspect.after(TestZioEmbeddedPostgres.afterEach()) @@
     TestAspect.afterAll(TestZioEmbeddedPostgres.afterAll()) @@
     TestAspect.sequential).provideLayerShared(testLive)

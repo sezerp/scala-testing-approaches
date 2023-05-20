@@ -59,8 +59,7 @@ class TestZioEmbeddedPostgres(
 }
 
 object TestZioEmbeddedPostgres extends StrictLogging {
-
-  def beforeAll(): RIO[TestZioEmbeddedPostgres, Unit] = {
+  def beforeEach(): RIO[TestZioEmbeddedPostgres, Unit] = {
     ZIO.service[TestZioEmbeddedPostgres].flatMap(_.migrate())
   }
 
