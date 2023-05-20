@@ -32,10 +32,11 @@ lazy val buildInfoSettings = Seq(
 
 lazy val root = (project in file("."))
   .settings(
-      name := "tapir-zio-http-template",
+    name := "scala-testing-approaches",
     scalaVersion := "2.13.8",
     libraryDependencies ++= allDeps,
-    scalacOptions ++= scalaCopts
+    scalacOptions ++= scalaCopts,
+    testFrameworks += new TestFramework("zio.test.sbt.ZTestFramework")
   )
   .settings(scalafixConfig)
   .enablePlugins(BuildInfoPlugin)

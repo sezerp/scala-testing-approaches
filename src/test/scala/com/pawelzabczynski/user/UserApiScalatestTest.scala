@@ -1,13 +1,13 @@
 package com.pawelzabczynski.user
 
 import cats.implicits.catsSyntaxOptionId
-import com.pawelzabczynski.test.{CreateUserResult, TestBase, TestSupport}
 import org.scalatest.concurrent.Eventually
 import sttp.model.StatusCode
 import com.pawelzabczynski.infrastructure.JsonSupport._
 import com.pawelzabczynski.security.AdminRole
+import com.pawelzabczynski.test.scalatest.{CreateUserResult, TestBase, TestSupport}
 
-class UserApiTest extends TestBase with TestSupport with Eventually {
+class UserApiScalatestTest extends TestBase with TestSupport with Eventually {
 
   "[POST] register endpoint" should "return apiKey" in {
     val request  = UserRegisterRequest("account name", "user_login", "test@email.com", "some_password_123")

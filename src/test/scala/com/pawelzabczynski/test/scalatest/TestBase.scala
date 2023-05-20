@@ -1,4 +1,4 @@
-package com.pawelzabczynski.test
+package com.pawelzabczynski.test.scalatest
 
 import com.pawelzabczynski.account.AccountService
 import com.pawelzabczynski.http.{Http, HttpApi}
@@ -16,8 +16,8 @@ import sttp.client3.SttpBackend
 import sttp.client3.asynchttpclient.fs2.AsyncHttpClientFs2Backend
 import sttp.client3.testing.SttpBackendStub
 import sttp.tapir.server.stub.TapirStubInterpreter
-import zio.interop.catz._
 import zio.Task
+import zio.interop.catz._
 
 class TestBase extends AnyFlatSpec with Matchers with BeforeAndAfterAll with TestEmbeddedPostgres with StrictLogging {
   Thread.setDefaultUncaughtExceptionHandler((t, e) => logger.error("Uncaught exception in thread: " + t, e))

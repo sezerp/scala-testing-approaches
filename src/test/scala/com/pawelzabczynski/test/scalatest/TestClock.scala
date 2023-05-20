@@ -1,11 +1,10 @@
-package com.pawelzabczynski.test
+package com.pawelzabczynski.test.scalatest
 
 import com.pawelzabczynski.util.Clock
-import org.scalatest.time.SpanSugar.convertIntToGrainOfTime
 
 import java.time.Instant
-import scala.concurrent.duration.FiniteDuration
 import java.util.concurrent.atomic.AtomicReference
+import scala.concurrent.duration.{DurationInt, FiniteDuration}
 
 object TestClock extends Clock {
   private val clock  = java.time.Clock.systemUTC()

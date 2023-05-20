@@ -1,4 +1,4 @@
-package com.pawelzabczynski.test
+package com.pawelzabczynski.test.scalatest
 
 import com.pawelzabczynski.config.Sensitive
 import com.pawelzabczynski.infrastructure.DbConfig

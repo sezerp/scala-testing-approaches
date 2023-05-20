@@ -1,12 +1,11 @@
-package com.pawelzabczynski
+package com.pawelzabczynski.test
 
 import com.pawelzabczynski.config.{Config, Sensitive, UserServiceConfig}
 import com.pawelzabczynski.http.HttpConfig
 import com.pawelzabczynski.infrastructure.DbConfig
-import zio.{Duration, Task, Unsafe}
-import zio._
+import zio.{Duration, Task, Unsafe, ZIO, durationInt}
 
-package object test {
+package object scalatest {
   val TestConfig: Config = Config(
     HttpConfig("localhost", 8080),
     DbConfig("postgres", Sensitive(""), "", true, "org.postgresql.Driver", 4),
@@ -16,7 +15,7 @@ package object test {
   implicit class TestUnsafeOps[A](t: Task[A]) {
 
     def runUnsafe(): A = {
-      runUnsafe(5 minutes)
+      runUnsafe(1 minute)
     }
     def runUnsafe(timeout: Duration): A = {
       Unsafe

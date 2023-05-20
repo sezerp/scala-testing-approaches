@@ -36,7 +36,10 @@ object Libs {
     "org.scalatest"                 %% "scalatest"              % "3.2.15"     % Test,
     "com.softwaremill.quicklens"    %% "quicklens"              % "1.8.10"     % Test,
     "com.softwaremill.sttp.tapir"   %% "tapir-sttp-stub-server" % tapirVersion % Test,
-    "io.zonky.test"                  % "embedded-postgres"      % "2.0.3"      % Test
+    "io.zonky.test"                  % "embedded-postgres"      % "2.0.3"      % Test,
+    "dev.zio"                       %% "zio-test"               % zioVersion   % Test,
+    "dev.zio"                       %% "zio-test-sbt"           % zioVersion   % Test,
+    "dev.zio"                       %% "zio-test-magnolia"      % zioVersion   % Test
   )
 
   private val configDeps = Seq(

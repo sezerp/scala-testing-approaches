@@ -1,14 +1,13 @@
-package com.pawelzabczynski.test
+package com.pawelzabczynski.test.scalatest
 
 import com.pawelzabczynski.infrastructure.DbConfig
+import com.pawelzabczynski.infrastructure.Doobie._
 import com.typesafe.scalalogging.StrictLogging
+import com.zaxxer.hikari.HikariDataSource
 import doobie.Transactor
 import org.flywaydb.core.Flyway
-import zio.Task
+import zio.{Task, _}
 import zio.interop.catz._
-import zio._
-import com.pawelzabczynski.infrastructure.Doobie._
-import com.zaxxer.hikari.HikariDataSource
 
 import java.util.concurrent.Executors
 import scala.concurrent.ExecutionContext

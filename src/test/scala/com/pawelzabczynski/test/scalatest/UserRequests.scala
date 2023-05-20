@@ -1,11 +1,10 @@
-package com.pawelzabczynski.test
+package com.pawelzabczynski.test.scalatest
 
-import com.pawelzabczynski.user.{UserLoginRequest, UserPatchRequest, UserRegisterRequest, UserRegisterResponse}
 import com.pawelzabczynski.infrastructure.JsonSupport._
 import com.pawelzabczynski.security.apiKey.ApiKey.ApiKeyId
+import com.pawelzabczynski.user.{UserLoginRequest, UserPatchRequest, UserRegisterRequest, UserRegisterResponse}
 import io.circe.syntax.EncoderOps
-import sttp.client3.Response
-import sttp.client3.{UriContext, basicRequest}
+import sttp.client3.{Response, UriContext, basicRequest}
 
 import java.util.UUID
 
@@ -23,11 +22,12 @@ trait UserRequests { self: TestRequestSupport with TestSupport =>
   }
 
   def userRegister(entity: UserRegisterRequest): Response[Either[String, String]] = {
-    basicRequest
+    val x = basicRequest
       .post(uri"$basePath/user/register")
       .body(entity.asJson.noSpaces)
       .send(backend)
-      .runUnsafe()
+
+    x.runUnsafe()
   }
 
   def userLogin(entity: UserLoginRequest): Response[Either[String, String]] = {
