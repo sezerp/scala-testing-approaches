@@ -14,6 +14,7 @@ import io.circe.syntax.EncoderOps
 import com.pawelzabczynski.infrastructure.JsonSupport._
 import com.pawelzabczynski.security.apiKey.ApiKey.ApiKeyId
 import com.pawelzabczynski.util.ErrorOps
+import sttp.model.StatusCode
 import zio.{Task, ZIO}
 
 import java.util.UUID
@@ -70,13 +71,13 @@ object ZIORequests {
       .map(_.body.shouldDeserializeTo[UserPatchRequest])
   }
 
-  def userPatch(entity: UserPatchRequest, apiKey: ApiKeyId)(backend: SttpBackend[Task, Any]): Task[UserPatchRequest] = {
+  def userPatch(entity: UserPatchRequest, apiKey: ApiKeyId)(backend: SttpBackend[Task, Any]): Task[StatusCode] = {
     basicRequest
       .patch(uri"$basePath/user")
       .header("Authorization", s"Bearer $apiKey")
       .body(entity.asJson.noSpaces)
       .send(backend)
       .tapError(err => ZIO.logErrorCause("Error occurred when try patch user with data.", err.toCause))
-      .map(_.body.shouldDeserializeTo[UserPatchRequest])
+      .map(_.code)
   }
 }
