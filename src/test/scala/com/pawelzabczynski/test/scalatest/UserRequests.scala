@@ -5,6 +5,7 @@ import com.pawelzabczynski.security.apiKey.ApiKey.ApiKeyId
 import com.pawelzabczynski.user.{UserLoginRequest, UserPatchRequest, UserRegisterRequest, UserRegisterResponse}
 import io.circe.syntax.EncoderOps
 import sttp.client3.{Response, UriContext, basicRequest}
+import zio.Task
 
 import java.util.UUID
 
@@ -22,12 +23,11 @@ trait UserRequests { self: TestRequestSupport with TestSupport =>
   }
 
   def userRegister(entity: UserRegisterRequest): Response[Either[String, String]] = {
-    val x = basicRequest
+    basicRequest
       .post(uri"$basePath/user/register")
       .body(entity.asJson.noSpaces)
       .send(backend)
-
-    x.runUnsafe()
+      .runUnsafe()
   }
 
   def userLogin(entity: UserLoginRequest): Response[Either[String, String]] = {
